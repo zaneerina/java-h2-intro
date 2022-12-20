@@ -3,6 +3,7 @@ package com.business.service;
 import com.business.dao.CustomerDAO;
 import com.business.domain.Customer;
 
+import java.sql.SQLException;
 import java.util.List;
 
 public class CustomerService {
@@ -27,4 +28,8 @@ public class CustomerService {
     }
 
 
+    public void CreateCustomerTable() throws SQLException {
+        //customer DAO will be used to implement the actual creation of the table
+        customerDAO.createTable();
+    }
 }

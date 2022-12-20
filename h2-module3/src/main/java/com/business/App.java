@@ -4,6 +4,8 @@ import com.business.dao.CustomerDAO;
 import com.business.domain.Customer;
 import com.business.service.CustomerService;
 
+import java.sql.SQLException;
+
 
 public class App {
 
@@ -17,7 +19,8 @@ public class App {
     //instantiate a new customer service object using customer DAO
     private static final CustomerService customerService = new CustomerService(new CustomerDAO());
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SQLException {
+        customerService.CreateCustomerTable();
         customerService.createCustomer(THEO, LEDGER, THEO_LEDGER_EMAIL);
         customerService.createCustomer(JESSICA, CORINO, JESSICA_CORINO_EMAIL);
         printAllCustomers();
@@ -27,6 +30,8 @@ public class App {
 
     private static void printAllCustomers(){
         System.out.println("printing all customers...");
+        customerService.getCustomers().
+                forEach(System.out::println);
     }
     private static void printCustomerByEmail(String email){}
 
