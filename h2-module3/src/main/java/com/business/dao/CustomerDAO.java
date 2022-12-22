@@ -2,10 +2,7 @@ package com.business.dao;
 
 import com.business.domain.Customer;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -29,8 +26,17 @@ public class CustomerDAO {
             "lastname varchar(256),"+
             "email varchar (265),"+
             "UNIQUE(email))"; // uniqueness constraint on the email
+    private static final String INSERT_SQL_CUSTOMER = "INSERT INTO Customer"+
+            "(firstname, lastname, email) VALUES (?,?,?)";
 
-    public void create(Customer customer){
+    public void create(Customer customer) throws SQLException{
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
+            PreparedStatement statement = connection.prepareStatement(INSERT_SQL_CUSTOMER);
+            statement.setString(1, customer.getFirstName());
+            statement.setString(2, customer.getLastName());
+            statement.setString(3, customer.getEmail());
+            statement.executeUpdate();
+        }
 
     }
     public List<Customer> getAll(){

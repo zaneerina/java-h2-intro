@@ -14,7 +14,7 @@ public class CustomerService {
         this.customerDAO = customerDAO;
     }
 
-    public void createCustomer(String firstName, String lastName, String email){
+    public void createCustomer(String firstName, String lastName, String email) throws SQLException {
         customerDAO.create(new Customer(firstName, lastName, email));
     }
 
