@@ -7,7 +7,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDAO {
-    // customer data access object is currently doing nothing but it will use H2
 
     /**
      * Variables for database connection; JDBC url specifies how we are connection to h2 database;
@@ -31,7 +30,7 @@ public class CustomerDAO {
     private static final String SELECT_ALL_SQL = "SELECT * from Customer";
 
     public void create(Customer customer) throws SQLException{
-        try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
+        try (Connection connection = getConnection()){
             PreparedStatement statement = connection.prepareStatement(INSERT_SQL_CUSTOMER);
             statement.setString(1, customer.getFirstName());
             statement.setString(2, customer.getLastName());
@@ -41,20 +40,16 @@ public class CustomerDAO {
 
     }
     public List<Customer> getAll() throws SQLException{
-        try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
+        try (Connection connection = getConnection()){
             Statement statement = connection.createStatement();
             ResultSet resultSet = statement.executeQuery(SELECT_ALL_SQL);
             List <Customer> customers = new ArrayList<>();
             while (resultSet.next()){
-                String firstName = resultSet.getString("firstname");
-                String lastName = resultSet.getString("lastname");
-                String email = resultSet.getString("email");
-                customers.add(new Customer(firstName,lastName,email));
+           customers.add(toCustomer(resultSet));
             }
             return customers;
         }
     }
-
 
     public Customer getByEmail (String email){
         return null;
@@ -65,10 +60,20 @@ public class CustomerDAO {
 
         // get a connection via driver manager:
 //        Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD); --> catch exception:
-        try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)) {
+        try (Connection connection = getConnection()) {
             // creation of statement that will be used by h2 when we'll send create table request
             Statement statement = connection.createStatement();
             statement.executeUpdate(CREATE_TABLE_SQL);
         }
+    }
+
+    private Customer toCustomer(ResultSet resultSet) throws SQLException {
+        String firstName = resultSet.getString("firstname");
+        String lastName = resultSet.getString("lastname");
+        String email = resultSet.getString("email");
+        return new Customer(firstName,lastName,email);
+    }
+    private Connection getConnection() throws SQLException {
+        return DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD);
     }
 }
