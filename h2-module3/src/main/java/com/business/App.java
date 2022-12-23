@@ -33,6 +33,9 @@ public class App {
         customerService.getCustomers().
                 forEach(System.out::println);
     }
-    private static void printCustomerByEmail(String email){}
+    private static void printCustomerByEmail(String email) throws SQLException {
+        System.out.println("Printing customers by email...");
+        System.out.println(customerService.getByEmail(email));
+    }
 
 }

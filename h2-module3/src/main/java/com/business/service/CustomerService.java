@@ -22,7 +22,7 @@ public class CustomerService {
         return customerDAO.getAll();
     }
 
-    public Customer getByEmail(String email){
+    public Customer getByEmail(String email) throws SQLException {
         return customerDAO.getByEmail(email);
 
     }

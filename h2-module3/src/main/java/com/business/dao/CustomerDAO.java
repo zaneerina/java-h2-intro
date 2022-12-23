@@ -28,6 +28,9 @@ public class CustomerDAO {
     private static final String INSERT_SQL_CUSTOMER = "INSERT INTO Customer"+
             "(firstname, lastname, email) VALUES (?,?,?)";
     private static final String SELECT_ALL_SQL = "SELECT * from Customer";
+    private static final String SELECT_BY_EMAIL_SQL =
+            // select everything from Customer table where email equals an email parameter
+            "SELECT * from Customer WHERE email=?";
 
     public void create(Customer customer) throws SQLException{
         try (Connection connection = getConnection()){
@@ -37,7 +40,6 @@ public class CustomerDAO {
             statement.setString(3, customer.getEmail());
             statement.executeUpdate();
         }
-
     }
     public List<Customer> getAll() throws SQLException{
         try (Connection connection = getConnection()){
@@ -51,8 +53,19 @@ public class CustomerDAO {
         }
     }
 
-    public Customer getByEmail (String email){
-        return null;
+    public Customer getByEmail (String email) throws SQLException {
+        try(Connection connection = getConnection()){
+            PreparedStatement preparedStatement = connection.prepareStatement(SELECT_BY_EMAIL_SQL);
+            // to retrieve results based on a parameter:
+            // add email to the first parameter index:
+            preparedStatement.setString(1, email);
+            // retrieve resultSet from preparedStatement execute query
+            ResultSet resultSet = preparedStatement.executeQuery();
+            // we know we'll get a single result due to the uniqueness constraint added when creating table,
+            // so we can safely call next
+            resultSet.next();
+            return toCustomer(resultSet);
+        }
     }
 
     public void createTable() throws SQLException {
