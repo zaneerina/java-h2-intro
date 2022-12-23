@@ -16,7 +16,8 @@ public class CustomerDAO {
      * This connection will create a table called test
      */
 
-    private static final String JDBC_URL = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;";
+//    private static final String JDBC_URL = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;"; // --> runs in memory
+    private static final String JDBC_URL = "jdbc:h2:~/test;";// persistent memory, will be stored in test folder
     private static final String USERNAME = "";
     private static final String PASSWORD = "";
     private static final String CREATE_TABLE_SQL = "CREATE TABLE Customer(" +

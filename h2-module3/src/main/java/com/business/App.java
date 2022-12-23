@@ -20,9 +20,10 @@ public class App {
     private static final CustomerService customerService = new CustomerService(new CustomerDAO());
 
     public static void main(String[] args) throws SQLException {
-        customerService.CreateCustomerTable();
-        customerService.createCustomer(THEO, LEDGER, THEO_LEDGER_EMAIL);
-        customerService.createCustomer(JESSICA, CORINO, JESSICA_CORINO_EMAIL);
+//        the following block is only-required when the app is run in-memory mode, instead of persitent mode
+//        customerService.CreateCustomerTable();
+//        customerService.createCustomer(THEO, LEDGER, THEO_LEDGER_EMAIL);
+//        customerService.createCustomer(JESSICA, CORINO, JESSICA_CORINO_EMAIL);
         printAllCustomers();
         printCustomerByEmail(JESSICA_CORINO_EMAIL);
         printCustomerByEmail(THEO_LEDGER_EMAIL);
