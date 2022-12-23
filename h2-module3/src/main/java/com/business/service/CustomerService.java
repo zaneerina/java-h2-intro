@@ -18,7 +18,7 @@ public class CustomerService {
         customerDAO.create(new Customer(firstName, lastName, email));
     }
 
-    public List<Customer> getCustomers(){
+    public List<Customer> getCustomers() throws SQLException {
         return customerDAO.getAll();
     }
 

@@ -28,7 +28,7 @@ public class App {
         printCustomerByEmail(THEO_LEDGER_EMAIL);
     }
 
-    private static void printAllCustomers(){
+    private static void printAllCustomers() throws SQLException {
         System.out.println("printing all customers...");
         customerService.getCustomers().
                 forEach(System.out::println);

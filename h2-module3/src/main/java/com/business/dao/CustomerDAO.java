@@ -3,7 +3,7 @@ package com.business.dao;
 import com.business.domain.Customer;
 
 import java.sql.*;
-import java.util.Arrays;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CustomerDAO {
@@ -28,6 +28,7 @@ public class CustomerDAO {
             "UNIQUE(email))"; // uniqueness constraint on the email
     private static final String INSERT_SQL_CUSTOMER = "INSERT INTO Customer"+
             "(firstname, lastname, email) VALUES (?,?,?)";
+    private static final String SELECT_ALL_SQL = "SELECT * from Customer";
 
     public void create(Customer customer) throws SQLException{
         try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
@@ -39,9 +40,21 @@ public class CustomerDAO {
         }
 
     }
-    public List<Customer> getAll(){
-        return Arrays.asList();
+    public List<Customer> getAll() throws SQLException{
+        try (Connection connection = DriverManager.getConnection(JDBC_URL, USERNAME, PASSWORD)){
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(SELECT_ALL_SQL);
+            List <Customer> customers = new ArrayList<>();
+            while (resultSet.next()){
+                String firstName = resultSet.getString("firstname");
+                String lastName = resultSet.getString("lastname");
+                String email = resultSet.getString("email");
+                customers.add(new Customer(firstName,lastName,email));
+            }
+            return customers;
+        }
     }
+
 
     public Customer getByEmail (String email){
         return null;
