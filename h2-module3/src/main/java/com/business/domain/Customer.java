@@ -1,27 +1,12 @@
 package com.business.domain;
 public class Customer {
     //the class encapsulates customer data - name, lastname & email
-    /* ljoti svarigas koda rindas ./...
-    asasadsf
-
-    sfdsfdsfgdg
-    dfg
-    dfgfhsf
-    hsfhfshjasdjhsjhfjdsfhjjsfjksjf
-     **
-    jauna rinda:
-        *adasdsjfjsdjfsjdfhsd
-    dfsdfsdf
-    sdfsdfsdfsdf
-
-    sdfwuwuweueueueu
-    fefefsef
-     */
     private final String firstName;
     private final String lastName;
     private final String email;
 
     public Customer (String firstName, String lastName, String email){
+        // constructor
         this.firstName = firstName;
         this.lastName = lastName;
         this.email  = email;
