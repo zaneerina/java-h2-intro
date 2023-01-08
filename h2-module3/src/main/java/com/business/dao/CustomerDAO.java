@@ -17,7 +17,8 @@ public class CustomerDAO {
      */
 
 //    private static final String JDBC_URL = "jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;"; // --> runs in memory
-    private static final String JDBC_URL = "jdbc:h2:~/test;";// persistent memory, will be stored in test folder
+    private static final String JDBC_URL = "jdbc:h2:~/test";// persistent memory, will be stored in test folder
+    // the same URL used to access console
     private static final String USERNAME = "";
     private static final String PASSWORD = "";
     private static final String CREATE_TABLE_SQL = "CREATE TABLE Customer(" +

@@ -26,8 +26,6 @@ public class CustomerService {
         return customerDAO.getByEmail(email);
 
     }
-
-
     public void CreateCustomerTable() throws SQLException {
         //customer DAO will be used to implement the actual creation of the table
         customerDAO.createTable();

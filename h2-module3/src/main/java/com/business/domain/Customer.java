@@ -1,7 +1,6 @@
 package com.business.domain;
-
 public class Customer {
-    //the class encapsulates the custoemr data - name, lastname & email
+    //the class encapsulates customer data - name, lastname & email
     private final String firstName;
     private final String lastName;
     private final String email;
@@ -10,7 +9,6 @@ public class Customer {
         this.firstName = firstName;
         this.lastName = lastName;
         this.email  = email;
-
     }
     public String getFirstName() {
         return firstName;
@@ -28,6 +26,4 @@ public class Customer {
         return String.format(
                 "Customer [firstName=%s; lastName=%s; email=%s ]", firstName, lastName, email);
     }
-
-
 }
