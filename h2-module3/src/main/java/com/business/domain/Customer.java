@@ -1,7 +1,6 @@
 package com.business.domain;
 public class Customer {
     //the class encapsulates customer data - name, lastname & email
-    //// lalalablahahaha kodeju kodeju kodesdfs
     private final String firstName;
     private final String lastName;
     private final String email;
