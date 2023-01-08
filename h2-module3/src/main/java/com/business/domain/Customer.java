@@ -8,6 +8,14 @@ public class Customer {
     dfg
     dfgfhsf
     hsfhfshjasdjhsjhfjdsfhjjsfjksjf
+     **
+    jauna rinda:
+        *adasdsjfjsdjfsjdfhsd
+    dfsdfsdf
+    sdfsdfsdfsdf
+
+    sdfwuwuweueueueu
+    fefefsef
      */
     private final String firstName;
     private final String lastName;
